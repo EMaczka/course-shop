@@ -10,4 +10,13 @@ public class Course {
     Long id;
     String title;
     String description;
+    Complexity complexity;
+    String course_date;
+    String city;
+    String scope;
+    Double price;
+    Integer participantsNumber;
+    Integer duration;
+    String image;
+
 }
