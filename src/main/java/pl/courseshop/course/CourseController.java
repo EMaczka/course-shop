@@ -1,9 +1,7 @@
 package pl.courseshop.course;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,15 @@ public class CourseController {
     @GetMapping("api/courses")
     List<Course> findAll(){
         return courseService.findAll();
+    }
+
+    @PostMapping("/api/courses")
+    Course save(@RequestBody Course course){
+        if (course.getId() != null){
+            throw new RuntimeException();
+        }
+
+        return courseService.save(course);
     }
 
 
