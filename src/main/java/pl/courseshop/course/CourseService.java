@@ -27,9 +27,14 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Course save(Course course) {
+    public Course saveOrUpdate(Course course) {
         log.info("Trying to find course: {}", course);
 
         return courseRepository.save(course);
+    }
+
+    public void delete(long id) {
+        log.info("Deleting course by id: {}", id);
+        courseRepository.deleteById(id);
     }
 }

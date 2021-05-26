@@ -27,9 +27,23 @@ public class CourseController {
             throw new RuntimeException();
         }
 
-        return courseService.save(course);
+        return courseService.saveOrUpdate(course);
     }
 
+    @PutMapping("/api/courses/{id}")
+    Course update(@RequestBody Course course, @PathVariable long id){
+        if (!course.getId().equals(id)){
+            throw new RuntimeException();
+        }
 
+        return courseService.saveOrUpdate(course);
+    }
 
+    @DeleteMapping("/api/courses/{id}")
+    void delete(@PathVariable long id){
+        courseService.delete(id);
+        }
 }
+
+
+
