@@ -8,6 +8,7 @@ CREATE TABLE course
     city VARCHAR(50) NOT NULL,
     scope MEDIUMTEXT NOT NULL,
     price DOUBLE,
+    reduction INT,
     participants_number INT,
     duration INT,
     image VARCHAR(255)
