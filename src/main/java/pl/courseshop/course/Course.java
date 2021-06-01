@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 @Getter
@@ -14,21 +17,21 @@ import java.util.Objects;
 public class Course {
 
     @Id
-    private Long id;
-    private String title;
-    private String description;
-    private Complexity complexity;
-    private String course_date;
-    private String city;
-    private String scope;
-    private Double price;
+    private final Long id;
+    private final String title;
+    private final String description;
+    private final Complexity complexity;
+    private final String course_date;
+    private final String city;
+    private final String scope;
+    private BigDecimal price;
     private Integer discount;
-    private Integer participantsNumber;
-    private Integer duration;
-    private String image;
+    private final Integer participantsNumber;
+    private final Integer duration;
+    private final String image;
 
     public Course(Long id, String title, String description, Complexity complexity, String course_date,
-                  String city, String scope, Double price, Integer discount, Integer participantsNumber, Integer duration,
+                  String city, String scope, BigDecimal price, Integer discount, Integer participantsNumber, Integer duration,
                   String image) {
         this.id = id;
         this.title = title;
@@ -43,4 +46,15 @@ public class Course {
         this.duration = duration;
         this.image = image;
     }
+
+    public BigDecimal applyDiscount() {
+        if (discount <= 0) {
+            return price;
+        }
+        BigDecimal priceFraction = BigDecimal.valueOf(100-discount); //80
+        priceFraction = priceFraction.divide(BigDecimal.valueOf(100)); //0.8
+
+        return price.multiply(priceFraction).setScale(2, RoundingMode.HALF_UP);//0.8 x 299.99
+    }
+
 }
