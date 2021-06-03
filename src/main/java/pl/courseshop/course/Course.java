@@ -1,13 +1,10 @@
 package pl.courseshop.course;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
-
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Objects;
 
@@ -25,13 +22,13 @@ public class Course {
     private final String city;
     private final String scope;
     private BigDecimal price;
-    private Integer discount;
+    private Long discount;
     private final Integer participantsNumber;
     private final Integer duration;
     private final String image;
 
     public Course(Long id, String title, String description, Complexity complexity, String course_date,
-                  String city, String scope, BigDecimal price, Integer discount, Integer participantsNumber, Integer duration,
+                  String city, String scope, BigDecimal price, Long discount, Integer participantsNumber, Integer duration,
                   String image) {
         this.id = id;
         this.title = title;
@@ -41,20 +38,20 @@ public class Course {
         this.city = city;
         this.scope = scope;
         this.price = price;
-        this.discount = Objects.requireNonNullElse(discount, 0);
+        this.discount = Objects.requireNonNullElse(discount, 0L);
         this.participantsNumber = participantsNumber;
         this.duration = duration;
         this.image = image;
     }
 
-    public BigDecimal applyDiscount() {
-        if (discount <= 0) {
+    public BigDecimal applyDiscount(Long userDiscount) {
+        if (this.discount <= 0) {
             return price;
         }
-        BigDecimal priceFraction = BigDecimal.valueOf(100-discount); //80
-        priceFraction = priceFraction.divide(BigDecimal.valueOf(100)); //0.8
+        BigDecimal priceFraction = BigDecimal.valueOf(100- this.discount);
+        priceFraction = priceFraction.divide(BigDecimal.valueOf(100));
 
-        return price.multiply(priceFraction).setScale(2, RoundingMode.HALF_UP);//0.8 x 299.99
+        return price.multiply(priceFraction).setScale(2, RoundingMode.HALF_UP);
     }
 
 }
