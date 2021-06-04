@@ -32,6 +32,6 @@ public class CustomExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handle(RuntimeException ex) {
         log.error("Unexpected exception. ", ex);
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

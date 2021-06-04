@@ -8,6 +8,7 @@ import pl.courseshop.course.dto.DiscountDto;
 import pl.courseshop.infrastructure.exceptions.ResourceNotFound;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -96,12 +97,11 @@ public class CourseService {
                 .discount(entity.getDiscount())
                 .participantsNumber(entity.getParticipantsNumber())
                 .image(entity.getImage())
-                .price(entity.getPrice())
+                .price(entity.getPrice().setScale(2, RoundingMode.HALF_UP))
                 .title(entity.getTitle())
                 .scope(entity.getScope())
+                .applyDiscount(entity.applyDiscount(entity.getDiscount()))
                 .build();
-
-
     }
 
 }
