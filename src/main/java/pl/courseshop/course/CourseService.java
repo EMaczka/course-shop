@@ -103,5 +103,4 @@ public class CourseService {
                 .applyDiscount(entity.applyDiscount(entity.getDiscount()))
                 .build();
     }
-
 }

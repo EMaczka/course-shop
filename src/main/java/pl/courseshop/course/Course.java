@@ -53,6 +53,4 @@ public class Course {
 
         return price.multiply(priceFraction).setScale(2, RoundingMode.HALF_UP);
     }
-
-
 }

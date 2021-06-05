@@ -3,7 +3,6 @@ package pl.courseshop.course;
 import pl.courseshop.course.dto.CourseDto;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class CourseTestData {
 
